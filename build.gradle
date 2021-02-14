@@ -10,16 +10,16 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
 
 version = "${version}"
 group = 'com.mrbysco.cactusmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "The-Cactus-Mod-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+ 
 minecraft {
-    mappings  channel: "${mcp_channel}", version: "${mcp_mappings}"
+  mappings  channel: 'snapshot', version: mcp_mappings
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -83,13 +83,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        url = "https://www.cursemaven.com"
-    }
-    maven {
-        name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
-    }
+ 
+ 
+  maven {
+    name = "mappings"
+    url 'https://dogforce-games.com/maven'
+  }
+  maven { url = "https://dvs1.progwml6.com/files/maven/"  }
+  maven { url = "https://modmaven.k-4u.nl"  }    
+  maven { url = "https://maven.theillusivec4.top/"    }
+  maven { url 'https://maven.blamejared.com' }    
+  maven { url 'https://www.cursemaven.com'  }
 }
 
 dependencies {
